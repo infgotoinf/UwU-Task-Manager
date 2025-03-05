@@ -1,0 +1,13 @@
+{% load static %}
+
+<div id="messages-container">
+    {% for message in messages %}
+        <hr>
+        <p>Отправитель: {{ message.sender_name }}</p>
+        <p>Сообщение: {{ message.message }}</p>
+        <p>Отправлено: {{ message.sent_at }}</p>
+        <hr>
+    {% endfor %}
+</div>
+
+<script src="{% static 'messages_app/src/js/ajax.js' %}"></script>
