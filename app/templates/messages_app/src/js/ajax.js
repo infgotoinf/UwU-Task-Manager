@@ -3,37 +3,67 @@ let get_data_url = 'get_data/' // Переход на ссылку с ajax за�
 
 const messagesContainer = document.querySelector('#messages-container'); // Сюда помещаются наши статьи
 
-function draw_messages(messages) {
-  // Очистим контейнер перед добавлением новых сообщений
-  messagesContainer.innerHTML = '';
+// function draw_messages(messages) {
+//   // Очистим контейнер перед добавлением новых сообщений
+//   messagesContainer.innerHTML = '';
 
-  // Для каждого сообщения в массиве messages создаем HTML
-  messages.forEach(message => {
-      const messageElement = document.createElement('div');
+//   // Для каждого сообщения в массиве messages создаем HTML
+//   messages.forEach(message => {
+//       const messageElement = document.createElement('div');
       
-      // Создаем элементы для отображения данных сообщения
-      const senderName = document.createElement('p');
-      senderName.textContent = `Отправитель: ${message.sender_name}`;
+//       // Создаем элементы для отображения данных сообщения
+//       const senderName = document.createElement('p');
+//       senderName.textContent = `Отправитель: ${message.sender_name}`;
       
-      const messageText = document.createElement('p');
-      messageText.textContent = `Сообщение: ${message.message}`;
+//       const messageText = document.createElement('p');
+//       messageText.textContent = `Сообщение: ${message.message}`;
       
-      const sentAt = document.createElement('p');
-      sentAt.textContent = `Отправлено: ${message.sent_at}`;
+//       const sentAt = document.createElement('p');
+//       sentAt.textContent = `Отправлено: ${message.sent_at}`;
       
-      // Создаем разделитель
+//       // Создаем разделитель
+//       const hr = document.createElement('hr');
+      
+//       // Добавляем все элементы в messageElement
+//       messageElement.appendChild(senderName);
+//       messageElement.appendChild(messageText);
+//       messageElement.appendChild(sentAt);
+//       messageElement.appendChild(hr);
+      
+//       // Вставляем messageElement в контейнер
+//       messagesContainer.appendChild(messageElement);
+//   });
+// }
+
+function draw_messages(numbers) {
+  numbersContainer.innerHTML = '';
+
+  numbers.forEach(number => {
+      const numberElement = document.createElement('div');
+      
+      const numbernumber = document.createElement('p');
+      numbernumber.textContent = `Отправитель: ${number.number}`;
+      
       const hr = document.createElement('hr');
       
-      // Добавляем все элементы в messageElement
-      messageElement.appendChild(senderName);
-      messageElement.appendChild(messageText);
-      messageElement.appendChild(sentAt);
-      messageElement.appendChild(hr);
+      numberElement.appendChild(numbernumber);
       
-      // Вставляем messageElement в контейнер
-      messagesContainer.appendChild(messageElement);
+      numbersContainer.appendChild(numberElement);
   });
 }
+
+// function ajax_get() {
+//   fetch(get_data_url, {
+//       method: 'GET', // Используем метод 'GET'
+//   })
+//   .then(response => response.json()) // Преобразуем ответ в JSON
+//   .then(data => {
+//       draw_messages(data.messages); // Передаем полученные сообщения в draw_messages
+//   })
+//   .catch(error => console.error('Ошибка:', error)); // Обрабатываем ошибки
+
+//   setInterval(ajax_get, 10000);
+// }
 
 function ajax_get() {
   fetch(get_data_url, {
@@ -41,7 +71,7 @@ function ajax_get() {
   })
   .then(response => response.json()) // Преобразуем ответ в JSON
   .then(data => {
-      draw_messages(data.messages); // Передаем полученные сообщения в draw_messages
+      draw_messages(data.numbers); // Передаем полученные сообщения в draw_messages
   })
   .catch(error => console.error('Ошибка:', error)); // Обрабатываем ошибки
 

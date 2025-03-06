@@ -12,12 +12,16 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Message',
+            # name='Message',
+            # fields=[
+            #     ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+            #     ('sender_name', models.CharField(max_length=100)),
+            #     ('message', models.TextField()),
+            #     ('sent_at', models.DateTimeField(auto_now_add=True)),
+            # ],
+            name='Number',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('sender_name', models.CharField(max_length=100)),
-                ('message', models.TextField()),
-                ('sent_at', models.DateTimeField(auto_now_add=True)),
+                ('number', models.TextField()),
             ],
         ),
     ]
