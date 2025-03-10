@@ -1,0 +1,5 @@
+﻿  Source.cpp
+C:\Users\studentcoll\Desktop\UwU\uwu task manager2\dll\test process\test process\Source.cpp(14,5): warning C4552: "!": результат выражения не используется
+  test process.vcxproj -> C:\Users\studentcoll\Desktop\UwU\uwu task manager2\dll\test process\x64\Debug\test process.exe
+  "pwsh.exe" не является внутренней или внешней
+  командой, исполняемой программой или пакетным файлом.

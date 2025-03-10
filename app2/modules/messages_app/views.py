@@ -2,8 +2,9 @@
 from django.shortcuts import render
 from django.http import JsonResponse
 from ctypes import CDLL
+import sys
 
-num = CDLL("E:\\Python\\uwu-task-manager2\\dll\\Dll1\\x64\\Debug\\Dll1.dll")
+num = CDLL("C:\\Users\\studentcoll\\Desktop\\UwU\\uwu task manager2\\dll\\Dll1\\x64\\Debug\\Dll1.dll")
 
 # Рендеринг страницы
 def show_page(request):

@@ -7,3 +7,4 @@
 #endif
 
 extern "C" TASKMANAGER_API int test();
+extern "C" TASKMANAGER_API void PrintProcessNameAndID();
