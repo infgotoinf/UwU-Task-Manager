@@ -5,4 +5,4 @@
 3. Установить django ```pip install django```
 4. Запустите сайт ```cd app2``` ```python manage.py runserver```
    - Если сайт не запускается, тк не может найти python,did not find executable at стоит пересоздать проект ```django-admin startproject app3```
-   - Также стоит изменить пкть к DLL во views.py
+   - Также стоит изменить путь к DLL во views.py
