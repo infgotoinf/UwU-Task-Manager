@@ -1,5 +1,5 @@
-env
-.venv
+env/
+*.env
 .idea
 .vs
 __pycache__
