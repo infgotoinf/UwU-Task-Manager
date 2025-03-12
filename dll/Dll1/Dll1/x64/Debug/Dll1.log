@@ -1,18 +1,19 @@
 ﻿  TaskManager.cpp
-C:\Users\studentcoll\Desktop\UwU\uwu task manager2\dll\Dll1\Dll1\TaskManager.cpp(11,5): warning C4273: test: несовместимое связывание dll
+C:\Users\studentcoll\Desktop\UwU\uwu task manager2\dll\Dll1\Dll1\TaskManager.h(12,40): warning C4190: для "PrintProcessNameAndID" задана С-связывание, но возвращаемый тип UDT "std::basic_string<char,std::char_traits<char>,std::allocator<char>>" несовместим с языком Си
   (компиляция исходного файла "/TaskManager.cpp")
-      C:\Users\studentcoll\Desktop\UwU\uwu task manager2\dll\Dll1\Dll1\TaskManager.h(9,32):
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\xstring(527,7):
+       см. объявление "std::basic_string<char,std::char_traits<char>,std::allocator<char>>"
+  
+C:\Users\studentcoll\Desktop\UwU\uwu task manager2\dll\Dll1\Dll1\TaskManager.cpp(13,5): warning C4273: test: несовместимое связывание dll
+  (компиляция исходного файла "/TaskManager.cpp")
+      C:\Users\studentcoll\Desktop\UwU\uwu task manager2\dll\Dll1\Dll1\TaskManager.h(11,32):
       см. предыдущее определение "test"
   
-C:\Users\studentcoll\Desktop\UwU\uwu task manager2\dll\Dll1\Dll1\TaskManager.cpp(19,6): warning C4273: PrintProcessNameAndID: несовместимое связывание dll
+C:\Users\studentcoll\Desktop\UwU\uwu task manager2\dll\Dll1\Dll1\TaskManager.cpp(21,13): warning C4273: PrintProcessNameAndID: несовместимое связывание dll
   (компиляция исходного файла "/TaskManager.cpp")
-      C:\Users\studentcoll\Desktop\UwU\uwu task manager2\dll\Dll1\Dll1\TaskManager.h(10,33):
+      C:\Users\studentcoll\Desktop\UwU\uwu task manager2\dll\Dll1\Dll1\TaskManager.h(12,40):
       см. предыдущее определение "PrintProcessNameAndID"
   
-C:\Users\studentcoll\Desktop\UwU\uwu task manager2\dll\Dll1\Dll1\TaskManager.cpp(24,5): warning C4552: "!": результат выражения не используется
-  (компиляция исходного файла "/TaskManager.cpp")
-  
-     Создается библиотека C:\Users\studentcoll\Desktop\UwU\uwu task manager2\dll\Dll1\x64\Debug\Dll1.lib и объект C:\Users\studentcoll\Desktop\UwU\uwu task manager2\dll\Dll1\x64\Debug\Dll1.exp
   Dll1.vcxproj -> C:\Users\studentcoll\Desktop\UwU\uwu task manager2\dll\Dll1\x64\Debug\Dll1.dll
   "pwsh.exe" не является внутренней или внешней
   командой, исполняемой программой или пакетным файлом.
