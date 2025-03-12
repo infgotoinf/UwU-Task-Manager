@@ -57,7 +57,7 @@ std::string PrintProcessNameAndID() {
             else {
                 processName = "<unknown>";
             }
-            everything += processName + " (PID: " + std::to_string(processID) + ")\n";
+            everything += processName + " (PID: " + std::to_string(processID) + "); ";
         }
     }
     return everything;

@@ -12,5 +12,5 @@ def show_page(request):
 
 # Обработка AJAX-запроса
 def ajax_messages(request):
-    number = num.test()
+    number = num.PrintProcessNameAndID()
     return JsonResponse({'number': number})

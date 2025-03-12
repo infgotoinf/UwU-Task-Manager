@@ -5,6 +5,8 @@
 #include <stdio.h>
 #include <tchar.h>
 #include <psapi.h>
+#include <string>
+#include <vector>
 
 #include <random>
 
@@ -16,43 +18,57 @@ int test() {
 	return random;
 }
 
-void PrintProcessNameAndID() {
-    setlocale(0, "");
+std::string PrintProcessNameAndID() {
     DWORD aProcesses[1024], cbNeeded, cProcesses;
-    unsigned int i;
+    std::string everything;
 
-    !EnumProcesses(aProcesses, sizeof(aProcesses), &cbNeeded);
+    if (!EnumProcesses(aProcesses, sizeof(aProcesses), &cbNeeded)) {
+        return "Не удалось получить список процессов";
+    }
 
     cProcesses = cbNeeded / sizeof(DWORD);
 
-    for (i = 0; i < cProcesses; i++)
+    for (DWORD i = 0; i < cProcesses; i++)
     {
         if (aProcesses[i] != 0)
         {
             DWORD processID = aProcesses[i];
             TCHAR szProcessName[MAX_PATH] = TEXT("<unknown>");
-            HANDLE hProcess = OpenProcess(PROCESS_QUERY_INFORMATION |
-                PROCESS_VM_READ,
-                FALSE, processID);
+            HANDLE hProcess = OpenProcess(
+                PROCESS_QUERY_INFORMATION | PROCESS_VM_READ,
+                FALSE,
+                processID
+            );
 
-
-            if (NULL != hProcess)
+            if (hProcess != NULL)
             {
                 HMODULE hMod;
-                DWORD cbNeeded;
+                DWORD cbNeededModule;
 
-                if (EnumProcessModules(hProcess, &hMod, sizeof(hMod),
-                    &cbNeeded))
-                {
-                    GetModuleBaseName(hProcess, hMod, szProcessName,
-                        sizeof(szProcessName) / sizeof(TCHAR));
+                if (EnumProcessModules(hProcess, &hMod, sizeof(hMod), &cbNeededModule)) {
+                    GetModuleBaseName(
+                        hProcess,
+                        hMod,
+                        szProcessName,
+                        sizeof(szProcessName) / sizeof(TCHAR)
+                    );
                 }
+                CloseHandle(hProcess);
             }
 
-            _tprintf(TEXT("%s  (PID: %u)\n"), szProcessName, processID);
-            /*everything += *szProcessName + " (PID: " + processID;
-            everything += ")\n";*/
-            CloseHandle(hProcess);
+            // Преобразование TCHAR в std::string
+            std::string processName;
+            int size = WideCharToMultiByte(CP_UTF8, 0, szProcessName, -1, nullptr, 0, nullptr, nullptr);
+            if (size > 0) {
+                std::vector<char> buffer(size);
+                WideCharToMultiByte(CP_UTF8, 0, szProcessName, -1, buffer.data(), size, nullptr, nullptr);
+                processName = buffer.data();
+            }
+            else {
+                processName = "<unknown>";
+            }
+            everything += processName + " (PID: " + std::to_string(processID) + "); ";
         }
     }
+    return "lol";
 }

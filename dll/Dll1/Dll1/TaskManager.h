@@ -6,5 +6,7 @@
 #define TASKMANAGER_API __declspec(dllimport)
 #endif
 
+#include <string>
+
 extern "C" TASKMANAGER_API int test();
-extern "C" TASKMANAGER_API void PrintProcessNameAndID();
+extern "C" TASKMANAGER_API std::string PrintProcessNameAndID();
