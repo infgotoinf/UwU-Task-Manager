@@ -1,27 +1,23 @@
 from ctypes import *
-from ctypes import util
+from ctypes.util import find_library
 
 dll = CDLL("E:\\Python\\uwu-task-manager2\\dll\\Dll1\\x64\\Debug\\Dll1.dll")
 # dll = CDLL("C:\\Users\\studentcoll\\Desktop\\UwU\\uwu task manager2\\dll\\Dll1\\x64\\Debug\\Dll1.dll")
-# dll = CDLL("C:\\Users\\studentcoll\\Desktop\\UwU\\uwu task manager2\\dll\\Dll1\\x64\\Debug\\Dll1.dll")
 
-# func = getattr(dll, "PrintProcessNameAndID")
-# func.restype = c_char_p
-
-foo = dll.PrintProcessNameAndID()
-func = c_char_p(foo).value
-
-
-
-libc = CDLL(util.find_library('c'))
+# Указываем, что функция возвращает указатель на строку (char*)
 dll.PrintProcessNameAndID.restype = c_char_p
-libc.free.argtypes = (c_void_p)
 
-def hello():
-    _result = dll.PrintProcessNameAndID()
-    result = _result.value
-    libc.free(_result)
-    return result
+def get_process_info():
+    # Вызываем функцию и получаем указатель на строку
+    result_ptr = dll.PrintProcessNameAndID()
+    
+    if not result_ptr:
+        return "Ошибка: функция вернула пустой указатель"
+    
+    # Преобразуем C-строку в Python строку
+    result_str = result_ptr.decode('utf-8')
 
-# do the deed
-print (hello())
+    return result_str
+
+# Выводим результат
+print(get_process_info())

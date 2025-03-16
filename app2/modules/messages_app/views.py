@@ -1,16 +1,21 @@
-# views.py
 from django.shortcuts import render
 from django.http import JsonResponse
-from ctypes import CDLL
-import sys
+from ctypes import CDLL, c_char_p
 
-num = CDLL("E:\\Python\\uwu-task-manager2\\dll\\Dll1\\x64\\Debug\\Dll1.dll")
+data = CDLL("E:\\Python\\uwu-task-manager2\\dll\\Dll1\\x64\\Debug\\Dll1.dll")
+# data = CDLL("C:\\Users\\studentcoll\\Desktop\\UwU\\uwu task manager2\\dll\\Dll1\\x64\\Debug\\Dll1.dll")
+data.PrintProcessNameAndID.restype = c_char_p
 
 # Рендеринг страницы
 def show_page(request):
-    return render(request, 'messages_app/messages.html')
+    processes = data.PrintProcessNameAndID()
+    return render(request, 'messages_app/messages.html', {'processes': processes})
 
 # Обработка AJAX-запроса
 def ajax_messages(request):
-    number = num.PrintProcessNameAndID()
-    return JsonResponse({'number': number})
+    processes = data.PrintProcessNameAndID().decode('utf-8')
+    lol = ""
+    for i in processes:
+        if (i == ':'): break
+        else: lol = lol + i
+    return JsonResponse({'processes': processes})
