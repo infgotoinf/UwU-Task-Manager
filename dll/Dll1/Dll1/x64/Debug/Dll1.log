@@ -1,21 +1,4 @@
-﻿  TaskManager.cpp
-E:\Python\uwu-task-manager2\dll\Dll1\Dll1\TaskManager.cpp(13,5): warning C4273: test: несовместимое связывание dll
-  (компиляция исходного файла "/TaskManager.cpp")
-      E:\Python\uwu-task-manager2\dll\Dll1\Dll1\TaskManager.h(9,32):
-      см. предыдущее определение "test"
-  
-E:\Python\uwu-task-manager2\dll\Dll1\Dll1\TaskManager.cpp(21,13): warning C4273: PrintProcessNameAndID: несовместимое связывание dll
-  (компиляция исходного файла "/TaskManager.cpp")
-      E:\Python\uwu-task-manager2\dll\Dll1\Dll1\TaskManager.h(10,40):
-      см. предыдущее определение "PrintProcessNameAndID"
-  
-E:\Python\uwu-task-manager2\dll\Dll1\Dll1\TaskManager.cpp(78,6): warning C4273: KillProcessByPID: несовместимое связывание dll
-  (компиляция исходного файла "/TaskManager.cpp")
-      E:\Python\uwu-task-manager2\dll\Dll1\Dll1\TaskManager.h(11,33):
-      см. предыдущее определение "KillProcessByPID"
-  
-E:\Python\uwu-task-manager2\dll\Dll1\Dll1\TaskManager.cpp(88,1): warning C4715: KillProcessByPID: значение возвращается не при всех путях выполнения
-     Создается библиотека E:\Python\uwu-task-manager2\dll\Dll1\x64\Debug\Dll1.lib и объект E:\Python\uwu-task-manager2\dll\Dll1\x64\Debug\Dll1.exp
-  Dll1.vcxproj -> E:\Python\uwu-task-manager2\dll\Dll1\x64\Debug\Dll1.dll
+﻿     Создается библиотека C:\Users\studentcoll\Desktop\UwU\uwu task manager2\dll\Dll1\x64\Debug\Dll1.lib и объект C:\Users\studentcoll\Desktop\UwU\uwu task manager2\dll\Dll1\x64\Debug\Dll1.exp
+  Dll1.vcxproj -> C:\Users\studentcoll\Desktop\UwU\uwu task manager2\dll\Dll1\x64\Debug\Dll1.dll
   "pwsh.exe" не является внутренней или внешней
   командой, исполняемой программой или пакетным файлом.

@@ -65,7 +65,7 @@ const char* PrintProcessNameAndID() {
             processName = "<unknown>";
         }
 
-        result += processName + ":" + std::to_string(processID) + "\n";
+        result += processName + ":" + std::to_string(processID) + ";";
     }
 
     // Выделяем память для результата

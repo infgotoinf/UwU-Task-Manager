@@ -5,7 +5,7 @@ function updateProcesses() {
     fetch(get_data_url)
         .then(response => response.json())
         .then(data => {
-            container.textContent = data.processes; // Обновляем число
+            container.textContent = data.processes; // Обновляем список процессов
         })
         .catch(error => console.error('Ошибка:', error));
 }
