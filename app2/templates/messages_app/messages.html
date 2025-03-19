@@ -2,8 +2,8 @@
 <body>
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
     <div id="process-container" class="processes">
-        {% for process in processes %}
-        <p>Name: {{ processes[process] }} PID: {{ processes[process] }}</p>
+        {% for process in "processes" %}
+        <p>Name: {{ process.name }} PID: {{ process.PID }}</p>
         {% endfor %}
     </div>
     <script src="{% static 'js/ajax.js' %}"></script>

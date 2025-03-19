@@ -61,4 +61,5 @@ def ajax_messages(request):
                 switch = True
                 name = ""
                 PID = ""
+                
     return JsonResponse(responce)

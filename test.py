@@ -38,7 +38,7 @@ def show_page():
     switch = True
     name = ""
     PID = ""
-    responce = dict()
+    responce = []
     for i in processes:
         if (switch):
             if (i != ':'):
@@ -54,10 +54,15 @@ def show_page():
                 switch = True
                 name = ""
                 PID = ""
+                for process in processes:
+                    responce.append({
+                        'name': process.name,
+                        'PID': process.PID,
+                    })
 
     return responce
 
 getet = show_page()
 
 for i in getet:
-    print(getet[i])
+    print(getet[i]["PID"])
