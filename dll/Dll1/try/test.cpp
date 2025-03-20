@@ -82,11 +82,7 @@ bool KillProcessByPID(int pid) {
 int main() {
     setlocale(0, "");
 
-    const char* processes = PrintProcessNameAndID();
-    if (processes) {
-        std::cout << processes;
-        delete[] processes; // Освобождаем память
-    }
+    std::cout << PrintProcessNameAndID() << std::endl;
 
     int pid;
     std::cout << "Введите PID процесса: ";
