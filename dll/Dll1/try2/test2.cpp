@@ -27,11 +27,11 @@ std::string GetMemoryInfo()
         if (GetProcessMemoryInfo(hProcess, &pmc, sizeof(pmc)))
         {
             oss << "Процесс ID: " << processes[i] << "\n"
-                << "\tPageFaultCount: " << pmc.PageFaultCount << "\n"
+                //<< "\tPageFaultCount: " << pmc.PageFaultCount << "\n"
                 << "\tPeakWorkingSetSize: " << floor((float)pmc.PeakWorkingSetSize / 104857.6) / 10 << " мб\n"
-                << "\tWorkingSetSize: " << floor((float)pmc.WorkingSetSize / 104857.6) / 10         << " мб\n"
-                << "\tPagefileUsage: " << floor((float)pmc.PagefileUsage / 104857.6) / 10           << " мб\n"
-                << "\tPeakPagefileUsage: " << floor((float)pmc.PeakPagefileUsage / 104857.6) / 10   << " мб\n\n";
+                << "\tWorkingSetSize: " << floor((float)pmc.WorkingSetSize / 104857.6) / 10 << " мб\n";
+                //<< "\tPagefileUsage: " << floor((float)pmc.PagefileUsage / 104857.6) / 10           << " мб\n"
+                //<< "\tPeakPagefileUsage: " << floor((float)pmc.PeakPagefileUsage / 104857.6) / 10   << " мб\n\n";
         }
 
         CloseHandle(hProcess);

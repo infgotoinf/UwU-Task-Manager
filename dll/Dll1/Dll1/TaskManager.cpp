@@ -22,13 +22,13 @@ const char* PrintProcessNameAndID() {
     DWORD aProcesses[1024], cbNeeded, cProcesses;
     std::string result;
 
-    if (!EnumProcesses(aProcesses, sizeof(aProcesses), &cbNeeded)) {
+    if (!EnumProcesses(aProcesses, sizeof(aProcesses), &cbNeeded))
         return "Error: Failed to enumerate processes";
-    }
 
     cProcesses = cbNeeded / sizeof(DWORD);
 
-    for (DWORD i = 0; i < cProcesses; i++) {
+    for (DWORD i = 0; i < cProcesses; i++)
+    {
         DWORD processID = aProcesses[i];
         if (processID == 0) continue;
 
@@ -39,10 +39,12 @@ const char* PrintProcessNameAndID() {
             processID
         );
 
-        if (hProcess != NULL) {
+        if (hProcess != NULL)
+        {
             HMODULE hMod;
             DWORD cbNeededModule;
-            if (EnumProcessModules(hProcess, &hMod, sizeof(hMod), &cbNeededModule)) {
+            if (EnumProcessModules(hProcess, &hMod, sizeof(hMod), &cbNeededModule))
+            {
                 GetModuleBaseNameW(
                     hProcess,
                     hMod,
@@ -52,18 +54,18 @@ const char* PrintProcessNameAndID() {
             }
             CloseHandle(hProcess);
         }
+        else continue;
 
         // Конвертация из UTF-16 в UTF-8
         int size = WideCharToMultiByte(CP_UTF8, 0, szProcessName, -1, nullptr, 0, nullptr, nullptr);
         std::string processName;
-        if (size > 0) {
+        if (size > 0)
+        {
             std::vector<char> buffer(size);
             WideCharToMultiByte(CP_UTF8, 0, szProcessName, -1, buffer.data(), size, nullptr, nullptr);
             processName = buffer.data();
         }
-        else {
-            processName = "<unknown>";
-        }
+        else processName = "<unknown>";
 
         result += processName + ":" + std::to_string(processID) + ";";
     }

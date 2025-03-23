@@ -1,3 +1,7 @@
-.processes {
+.process {
+    color: black;
     font-size: 28px;
+    /* margin: 5px;
+    padding: 10px;
+    border: 1px solid #ddd; */
 }
