@@ -5,3 +5,94 @@
     padding: 10px;
     border: 1px solid #ddd; */
 }
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    overflow-x: hidden;
+}
+
+/* Верхняя панель */
+.top-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: #333;
+    color: white;
+    display: flex;
+    padding: 10px;
+    font-weight: bold;
+    border-bottom: 2px solid #444;
+}
+
+/* Контейнер для колонок */
+.table-container {
+    width: 100%;
+    display: flex;
+    overflow-x: auto; /* Горизонтальный скролл */
+    margin-top: 50px; /* Отступ от верхней панели */
+}
+
+/* Строки */
+.table {
+    display: flex;
+    flex-direction: column;
+    min-width: 600px; /* Минимальная ширина, чтобы появились полосы прокрутки */
+}
+
+/* Одна строка */
+.process-row, .header-row {
+    display: flex;
+    border-bottom: 1px solid #ddd;
+}
+
+.process-row div, .header-row div {
+    flex: 1;
+    padding: 10px;
+    text-align: center;
+    border-right: 1px solid #ddd;
+    position: relative;
+}
+
+.header-row div:last-child,
+.process-row div:last-child {
+    border-right: none;
+}
+
+/* Ползунок изменения ширины */
+.resizer {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 5px;
+    height: 100%;
+    cursor: ew-resize;
+    background: transparent;
+}
+
+.resizer:hover {
+    background: gray;
+}
+
+/* Нижняя панель */
+.bottom-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: #222;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    border-top: 2px solid #444;
+}
+
+.btn {
+    background: red;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+}

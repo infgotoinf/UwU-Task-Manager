@@ -7,5 +7,5 @@
 #endif
 
 extern "C" TASKMANAGER_API int test();
-extern "C" TASKMANAGER_API const char* PrintProcessNameAndID();
+extern "C" TASKMANAGER_API const char* PrintProcessInfo();
 extern "C" TASKMANAGER_API bool KillProcessByPID(int pid);

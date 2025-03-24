@@ -18,7 +18,7 @@ int test() {
 	return random;
 }
 
-const char* PrintProcessNameAndID() {
+const char* PrintProcessInfo() {
     DWORD aProcesses[1024], cbNeeded, cProcesses;
     std::string result;
 
@@ -52,6 +52,14 @@ const char* PrintProcessNameAndID() {
                     sizeof(szProcessName) / sizeof(wchar_t)
                 );
             }
+            PROCESS_MEMORY_COUNTERS pmc;
+            if (GetProcessMemoryInfo(hProcess, &pmc, sizeof(pmc)))
+            {
+                result += std::to_string(floor((float)pmc.WorkingSetSize / 104857.6) / 10);
+                result.erase(result.find_last_not_of('0') + 1, std::string::npos);
+                result.erase(result.find_last_not_of(',') + 1, std::string::npos);
+                result += ":";
+            }
             CloseHandle(hProcess);
         }
         else continue;
@@ -67,7 +75,7 @@ const char* PrintProcessNameAndID() {
         }
         else processName = "<unknown>";
 
-        result += processName + ":" + std::to_string(processID) + ";";
+        result += processName + "|" + std::to_string(processID) + ";";
     }
 
     // Выделяем память для результата

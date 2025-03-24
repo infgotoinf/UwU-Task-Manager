@@ -7,7 +7,7 @@
 #include <string>
 #include <vector>
 
-const char* PrintProcessNameAndID() {
+const char* PrintProcessInfo() {
     DWORD aProcesses[1024], cbNeeded, cProcesses;
     std::string result;
 
@@ -41,6 +41,14 @@ const char* PrintProcessNameAndID() {
                     sizeof(szProcessName) / sizeof(wchar_t)
                 );
             }
+            PROCESS_MEMORY_COUNTERS pmc;
+            if (GetProcessMemoryInfo(hProcess, &pmc, sizeof(pmc)))
+            {
+                result += std::to_string(floor((float)pmc.WorkingSetSize / 104857.6) / 10);
+                result.erase(result.find_last_not_of('0') + 1, std::string::npos);
+                result.erase(result.find_last_not_of(',') + 1, std::string::npos);
+                result += ":";
+            }
             CloseHandle(hProcess);
         }
         else continue;
@@ -56,7 +64,7 @@ const char* PrintProcessNameAndID() {
         }
         else processName = "<unknown>";
 
-        result += processName + ":" + std::to_string(processID) + "\n";
+        result += processName + "|" + std::to_string(processID) + "\n";
     }
 
     // Выделяем память для результата
@@ -84,7 +92,7 @@ bool KillProcessByPID(int pid) {
 int main() {
     setlocale(0, "");
 
-    std::cout << PrintProcessNameAndID() << std::endl;
+    std::cout << PrintProcessInfo() << std::endl;
 
     int pid;
     std::cout << "Введите PID процесса: ";

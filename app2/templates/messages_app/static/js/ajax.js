@@ -1,25 +1,29 @@
 const get_data_url = '/get_data/';
 const container = document.getElementById('process-container');
 
+const table = document.querySelector(".table");
+
 function updateProcesses() {
     fetch(get_data_url)
         .then(response => response.json())
         .then(data => {
-            let html = '';
+            table.innerHTML = ""; 
             const processes = data.processes;
-            
-            // Перебираем все PID в объекте процессов
             for (const pid in processes) {
                 const process = processes[pid];
-                html += `
+                const row = document.createElement("div");
+                row.classList.add("process-row");
+                row.innerHTML = `
                     <div class="process">
                         <span class="name">Name: ${process.name}</span>
                         <span class="pid">PID: ${pid}</span>
+                        <span class="memUse">MemUse: ${process.memUse}</span>
                     </div>
                 `;
-            }
+                table.appendChild(row);
+            };
             
-            container.innerHTML = html || '<div>No processes found</div>';
+            container.innerHTML = table.innerHTML || '<div>No processes found</div>';
         })
         .catch(error => console.error('Error:', error));
 }
