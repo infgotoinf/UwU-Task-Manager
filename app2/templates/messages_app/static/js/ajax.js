@@ -17,7 +17,7 @@ function updateProcesses() {
                     <div class="process">
                         <span class="name">Name: ${process.name}</span>
                         <span class="pid">PID: ${pid}</span>
-                        <span class="memUse">MemUse: ${process.memUse}</span>
+                        <span class="memUse">MemUse: ${process.memUse}Mb</span>
                     </div>
                 `;
                 table.appendChild(row);
