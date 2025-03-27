@@ -6,3 +6,5 @@
 4. Запустите сайт ```cd app2``` ```python manage.py runserver```
    - Если сайт не запускается, тк не может найти python,did not find executable at стоит пересоздать проект ```django-admin startproject app3```
    - Также стоит изменить путь к DLL во views.py
+# В скором времени мы планируем перейти на electron
+- https://www.electronjs.org/docs/latest/tutorial/tutorial-publishing-updating
