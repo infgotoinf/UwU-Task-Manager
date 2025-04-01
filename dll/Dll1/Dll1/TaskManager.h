@@ -6,6 +6,5 @@
 #define TASKMANAGER_API __declspec(dllimport)
 #endif
 
-extern "C" TASKMANAGER_API int test();
 extern "C" TASKMANAGER_API const char* PrintProcessInfo();
 extern "C" TASKMANAGER_API bool KillProcessByPID(int pid);

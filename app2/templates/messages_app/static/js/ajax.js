@@ -18,6 +18,7 @@ function updateProcesses() {
                         <span class="name">Name: ${process.name}</span>
                         <span class="pid">PID: ${pid}</span>
                         <span class="memUse">MemUse: ${process.memUse}Mb</span>
+                        <span class="CPUUse">CPUUse: ${process.CPUUse}%</span>
                     </div>
                 `;
                 table.appendChild(row);

@@ -1,20 +1,17 @@
 ﻿  TaskManager.cpp
-C:\Users\studentcoll\Desktop\UwU\uwu task manager2\dll\Dll1\Dll1\TaskManager.cpp(13,5): warning C4273: test: несовместимое связывание dll
+E:\Python\uwu-task-manager2\dll\Dll1\Dll1\TaskManager.cpp(14,13): warning C4273: PrintProcessInfo: несовместимое связывание dll
   (компиляция исходного файла "/TaskManager.cpp")
-      C:\Users\studentcoll\Desktop\UwU\uwu task manager2\dll\Dll1\Dll1\TaskManager.h(9,32):
-      см. предыдущее определение "test"
-  
-C:\Users\studentcoll\Desktop\UwU\uwu task manager2\dll\Dll1\Dll1\TaskManager.cpp(21,13): warning C4273: PrintProcessInfo: несовместимое связывание dll
-  (компиляция исходного файла "/TaskManager.cpp")
-      C:\Users\studentcoll\Desktop\UwU\uwu task manager2\dll\Dll1\Dll1\TaskManager.h(10,40):
+      E:\Python\uwu-task-manager2\dll\Dll1\Dll1\TaskManager.h(9,40):
       см. предыдущее определение "PrintProcessInfo"
   
-C:\Users\studentcoll\Desktop\UwU\uwu task manager2\dll\Dll1\Dll1\TaskManager.cpp(88,6): warning C4273: KillProcessByPID: несовместимое связывание dll
+E:\Python\uwu-task-manager2\dll\Dll1\Dll1\TaskManager.cpp(16,11): warning C4101: processID: неиспользованная локальная переменная
   (компиляция исходного файла "/TaskManager.cpp")
-      C:\Users\studentcoll\Desktop\UwU\uwu task manager2\dll\Dll1\Dll1\TaskManager.h(11,33):
+  
+E:\Python\uwu-task-manager2\dll\Dll1\Dll1\TaskManager.cpp(129,6): warning C4273: KillProcessByPID: несовместимое связывание dll
+  (компиляция исходного файла "/TaskManager.cpp")
+      E:\Python\uwu-task-manager2\dll\Dll1\Dll1\TaskManager.h(10,33):
       см. предыдущее определение "KillProcessByPID"
   
-     Создается библиотека C:\Users\studentcoll\Desktop\UwU\uwu task manager2\dll\Dll1\x64\Debug\Dll1.lib и объект C:\Users\studentcoll\Desktop\UwU\uwu task manager2\dll\Dll1\x64\Debug\Dll1.exp
-  Dll1.vcxproj -> C:\Users\studentcoll\Desktop\UwU\uwu task manager2\dll\Dll1\x64\Debug\Dll1.dll
+  Dll1.vcxproj -> E:\Python\uwu-task-manager2\dll\Dll1\x64\Debug\Dll1.dll
   "pwsh.exe" не является внутренней или внешней
   командой, исполняемой программой или пакетным файлом.

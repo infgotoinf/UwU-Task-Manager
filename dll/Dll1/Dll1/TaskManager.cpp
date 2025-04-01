@@ -7,25 +7,48 @@
 #include <psapi.h>
 #include <string>
 #include <vector>
-
-#include <random>
-
-int test() {
-	std::random_device dev;
-	std::mt19937 rnd(dev());
-	std::uniform_int_distribution<unsigned> dist(1, 100);
-	unsigned random = dist(rnd);
-	return random;
-}
+#include <map>
+#include <thread>
+#include <chrono>
 
 const char* PrintProcessInfo() {
     DWORD aProcesses[1024], cbNeeded, cProcesses;
+    DWORD processID;
     std::string result;
 
     if (!EnumProcesses(aProcesses, sizeof(aProcesses), &cbNeeded))
-        return "Error: Failed to enumerate processes";
+        return "";
 
     cProcesses = cbNeeded / sizeof(DWORD);
+
+    FILETIME idleTime, kernelTime1, userTime1;
+    GetSystemTimes(&idleTime, &kernelTime1, &userTime1);
+
+    std::map<DWORD, FILETIME> procKernelTimes1, procUserTimes1;
+
+    for (DWORD i = 0; i < cProcesses; i++)
+    {
+        DWORD processID = aProcesses[i];
+        if (processID == 0) continue;
+
+        wchar_t szProcessName[MAX_PATH] = L"<unknown>";
+        HANDLE hProcess = OpenProcess(
+            PROCESS_QUERY_INFORMATION | PROCESS_VM_READ,
+            FALSE,
+            processID
+        );
+        FILETIME procCreationTime, procExitTime, procKernelTime, procUserTime;
+        if (GetProcessTimes(hProcess, &procCreationTime, &procExitTime, &procKernelTime, &procUserTime)) {
+            procKernelTimes1[aProcesses[i]] = procKernelTime;
+            procUserTimes1[aProcesses[i]] = procUserTime;
+        }
+        CloseHandle(hProcess);
+    }
+
+    std::this_thread::sleep_for(std::chrono::seconds(1));
+
+    FILETIME kernelTime2, userTime2;
+    GetSystemTimes(&idleTime, &kernelTime2, &userTime2);
 
     for (DWORD i = 0; i < cProcesses; i++)
     {
@@ -57,7 +80,25 @@ const char* PrintProcessInfo() {
             {
                 result += std::to_string(floor((float)pmc.WorkingSetSize / 104857.6) / 10);
                 result.erase(result.find_last_not_of('0') + 1, std::string::npos);
-                result.erase(result.find_last_not_of(',') + 1, std::string::npos);
+                result.erase(result.find_last_not_of('.') + 1, std::string::npos);
+                result += ":";
+            }
+
+            FILETIME procCreationTime, procExitTime, procKernelTime2, procUserTime2;
+            if (GetProcessTimes(hProcess, &procCreationTime, &procExitTime, &procKernelTime2, &procUserTime2)) {
+                if (procKernelTimes1.find(processID) == procKernelTimes1.end()) continue;
+
+                ULONGLONG kernelDiff = (*(ULONGLONG*)&procKernelTime2 - *(ULONGLONG*)&procKernelTimes1[processID]);
+                ULONGLONG userDiff = (*(ULONGLONG*)&procUserTime2 - *(ULONGLONG*)&procUserTimes1[processID]);
+                ULONGLONG procTotal = kernelDiff + userDiff;
+
+                ULONGLONG sysTotal = (*(ULONGLONG*)&kernelTime2 - *(ULONGLONG*)&kernelTime1) +
+                    (*(ULONGLONG*)&userTime2 - *(ULONGLONG*)&userTime1);
+
+                double cpuUsage = (procTotal * 100.0) / sysTotal;
+                result += std::to_string(floor(cpuUsage * 10) / 10);
+                result.erase(result.find_last_not_of('0') + 1, std::string::npos);
+                result.erase(result.find_last_not_of('.') + 1, std::string::npos);
                 result += ":";
             }
             CloseHandle(hProcess);
@@ -75,14 +116,14 @@ const char* PrintProcessInfo() {
         }
         else processName = "<unknown>";
 
-        result += processName + "|" + std::to_string(processID) + ";";
+        result += processName + ":" + std::to_string(processID) + ";";
     }
 
-    // Выделяем память для результата
     char* output = new char[result.size() + 1];
     strcpy_s(output, result.size() + 1, result.c_str());
     return output;
 }
+
 
 
 bool KillProcessByPID(int pid) {

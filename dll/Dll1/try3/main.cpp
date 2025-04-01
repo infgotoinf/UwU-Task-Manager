@@ -1,45 +1,138 @@
 #include <windows.h>
+#include <psapi.h>
 #include <iostream>
+#include <vector>
 #include <thread>
+#include <chrono>
+#include <string>
+#include <map>
 
-double GetCPUUsage(DWORD processID) {
+const char* GetAllProcessesCPUUsage() {
+    DWORD aProcesses[1024], cbNeeded, cProcesses;
+    DWORD processID;
+    std::string result;
 
-    HANDLE hProcess = OpenProcess(PROCESS_QUERY_INFORMATION, FALSE, processID);
-    if (!hProcess) return -1;
+    if (!EnumProcesses(aProcesses, sizeof(aProcesses), &cbNeeded))
+        return "";
 
-    FILETIME idleTime, kernelTime1, userTime1, kernelTime2, userTime2;
-    FILETIME procCreationTime, procExitTime, procKernelTime1, procUserTime1, procKernelTime2, procUserTime2;
+    cProcesses = cbNeeded / sizeof(DWORD);
+
+    FILETIME idleTime, kernelTime1, userTime1;
     GetSystemTimes(&idleTime, &kernelTime1, &userTime1);
-    GetProcessTimes(hProcess, &procCreationTime, &procExitTime, &procKernelTime1, &procUserTime1);
 
-    std::this_thread::sleep_for(std::chrono::seconds(1)); // Ждём 1 секунду
+    std::map<DWORD, FILETIME> procKernelTimes1, procUserTimes1;
+
+    /*for (DWORD i = 0; i < cProcesses; i++)
+    {
+        DWORD processID = aProcesses[i];
+        HANDLE hProcess = OpenProcess(PROCESS_QUERY_INFORMATION, FALSE, processID);
+        if (!hProcess) continue;
+
+        FILETIME procCreationTime, procExitTime, procKernelTime, procUserTime;
+        if (GetProcessTimes(hProcess, &procCreationTime, &procExitTime, &procKernelTime, &procUserTime)) {
+            procKernelTimes1[processID] = procKernelTime;
+            procUserTimes1[processID] = procUserTime;
+        }
+        CloseHandle(hProcess);
+    }*/
+    for (DWORD i = 0; i < cProcesses; i++)
+    {
+        DWORD processID = aProcesses[i];
+        if (processID == 0) continue;
+
+        wchar_t szProcessName[MAX_PATH] = L"<unknown>";
+        HANDLE hProcess = OpenProcess(
+            PROCESS_QUERY_INFORMATION | PROCESS_VM_READ,
+            FALSE,
+            processID
+        );
+        FILETIME procCreationTime, procExitTime, procKernelTime, procUserTime;
+        if (GetProcessTimes(hProcess, &procCreationTime, &procExitTime, &procKernelTime, &procUserTime)) {
+            procKernelTimes1[aProcesses[i]] = procKernelTime;
+            procUserTimes1[aProcesses[i]] = procUserTime;
+        }
+        CloseHandle(hProcess);
+    }
+
+    std::this_thread::sleep_for(std::chrono::seconds(1));
+
+    FILETIME kernelTime2, userTime2;
     GetSystemTimes(&idleTime, &kernelTime2, &userTime2);
-    GetProcessTimes(hProcess, &procCreationTime, &procExitTime, &procKernelTime2, &procUserTime2);
 
-    CloseHandle(hProcess);
+    for (DWORD i = 0; i < cProcesses; i++)
+    {
+        DWORD processID = aProcesses[i];
+        if (processID == 0) continue;
 
-    ULONGLONG sysKernelDiff = (*(ULONGLONG*)&kernelTime2 - *(ULONGLONG*)&kernelTime1);
-    ULONGLONG sysUserDiff = (*(ULONGLONG*)&userTime2 - *(ULONGLONG*)&userTime1);
-    ULONGLONG sysTotal = sysKernelDiff + sysUserDiff;
+        wchar_t szProcessName[MAX_PATH] = L"<unknown>";
+        HANDLE hProcess = OpenProcess(
+            PROCESS_QUERY_INFORMATION | PROCESS_VM_READ,
+            FALSE,
+            processID
+        );
 
-    ULONGLONG procKernelDiff = (*(ULONGLONG*)&procKernelTime2 - *(ULONGLONG*)&procKernelTime1);
-    ULONGLONG procUserDiff = (*(ULONGLONG*)&procUserTime2 - *(ULONGLONG*)&procUserTime1);
-    ULONGLONG procTotal = procKernelDiff + procUserDiff;
+        if (hProcess != NULL)
+        {
+            HMODULE hMod;
+            DWORD cbNeededModule;
+            if (EnumProcessModules(hProcess, &hMod, sizeof(hMod), &cbNeededModule))
+            {
+                GetModuleBaseNameW(
+                    hProcess,
+                    hMod,
+                    szProcessName,
+                    sizeof(szProcessName) / sizeof(wchar_t)
+                );
+            }
+            PROCESS_MEMORY_COUNTERS pmc;
+            if (GetProcessMemoryInfo(hProcess, &pmc, sizeof(pmc)))
+            {
+                result += std::to_string(floor((float)pmc.WorkingSetSize / 104857.6) / 10);
+                result.erase(result.find_last_not_of('0') + 1, std::string::npos);
+                result.erase(result.find_last_not_of('.') + 1, std::string::npos);
+                result += ":";
+            }
 
-    return (procTotal * 100.0) / sysTotal;
+            FILETIME procCreationTime, procExitTime, procKernelTime2, procUserTime2;
+            if (GetProcessTimes(hProcess, &procCreationTime, &procExitTime, &procKernelTime2, &procUserTime2)) {
+                if (procKernelTimes1.find(processID) == procKernelTimes1.end()) continue;
+
+                ULONGLONG kernelDiff = (*(ULONGLONG*)&procKernelTime2 - *(ULONGLONG*)&procKernelTimes1[processID]);
+                ULONGLONG userDiff = (*(ULONGLONG*)&procUserTime2 - *(ULONGLONG*)&procUserTimes1[processID]);
+                ULONGLONG procTotal = kernelDiff + userDiff;
+
+                ULONGLONG sysTotal = (*(ULONGLONG*)&kernelTime2 - *(ULONGLONG*)&kernelTime1) +
+                    (*(ULONGLONG*)&userTime2 - *(ULONGLONG*)&userTime1);
+
+                double cpuUsage = (procTotal * 100.0) / sysTotal;
+                result += std::to_string(floor(cpuUsage * 10) / 10);
+                result.erase(result.find_last_not_of('0') + 1, std::string::npos);
+                result.erase(result.find_last_not_of('.') + 1, std::string::npos);
+                result += ":";
+            }
+            CloseHandle(hProcess);
+        }
+        else continue;
+
+        // Конвертация из UTF-16 в UTF-8
+        int size = WideCharToMultiByte(CP_UTF8, 0, szProcessName, -1, nullptr, 0, nullptr, nullptr);
+        std::string processName;
+        if (size > 0)
+        {
+            std::vector<char> buffer(size);
+            WideCharToMultiByte(CP_UTF8, 0, szProcessName, -1, buffer.data(), size, nullptr, nullptr);
+            processName = buffer.data();
+        }
+        else processName = "<unknown>";
+
+        result += processName + ":" + std::to_string(processID) + "\n";
+    }
+
+    char* output = new char[result.size() + 1];
+    strcpy_s(output, result.size() + 1, result.c_str());
+    return output;
 }
 
 int main() {
-    setlocale(0, "");
-    DWORD pid;
-    std::cout << "Введите PID процесса: ";
-    std::cin >> pid;
-
-    double cpuUsage = GetCPUUsage(pid);
-    if (cpuUsage >= 0)
-        std::cout << "Процесс " << pid << " использует " << cpuUsage << "% CPU\n";
-    else
-        std::cout << "Ошибка! Не удалось открыть процесс.\n";
-
-    return 0;
+    std::cout << GetAllProcessesCPUUsage();
 }
