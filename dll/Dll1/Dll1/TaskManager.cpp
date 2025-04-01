@@ -56,11 +56,7 @@ const char* PrintProcessInfo() {
         if (processID == 0) continue;
 
         wchar_t szProcessName[MAX_PATH] = L"<unknown>";
-        HANDLE hProcess = OpenProcess(
-            PROCESS_QUERY_INFORMATION | PROCESS_VM_READ,
-            FALSE,
-            processID
-        );
+        HANDLE hProcess = OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_READ, FALSE, processID);
 
         if (hProcess != NULL)
         {
@@ -68,10 +64,7 @@ const char* PrintProcessInfo() {
             DWORD cbNeededModule;
             if (EnumProcessModules(hProcess, &hMod, sizeof(hMod), &cbNeededModule))
             {
-                GetModuleBaseNameW(
-                    hProcess,
-                    hMod,
-                    szProcessName,
+                GetModuleBaseNameW(hProcess, hMod, szProcessName,
                     sizeof(szProcessName) / sizeof(wchar_t)
                 );
             }
