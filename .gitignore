@@ -3,3 +3,6 @@ env/
 .idea
 .vs
 __pycache__
+node_modules/
+package-lock.json
+forge.config.js
