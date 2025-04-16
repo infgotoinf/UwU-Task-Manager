@@ -12,47 +12,37 @@ body {
     overflow-x: hidden;
 }
 
-/* Верхняя панель */
-.top-bar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background: #333;
-    color: white;
-    display: flex;
-    padding: 10px;
-    font-weight: bold;
-    border-bottom: 2px solid #444;
-}
-
-/* Контейнер для колонок */
+/* Контейнер таблицы */
 .table-container {
     width: 100%;
     display: flex;
-    overflow-x: auto; /* Горизонтальный скролл */
-    margin-top: 50px; /* Отступ от верхней панели */
+    overflow-x: auto;
+    margin-top: 60px;
+    padding-bottom: 60px;
 }
 
-/* Строки */
+/* Вся таблица */
 .table {
     display: flex;
     flex-direction: column;
-    min-width: 600px; /* Минимальная ширина, чтобы появились полосы прокрутки */
+    min-width: 600px;
 }
 
-/* Одна строка */
-.process-row, .header-row {
+/* Строки */
+.header-row, .process-row {
     display: flex;
     border-bottom: 1px solid #ddd;
 }
 
-.process-row div, .header-row div {
+/* Ячейки */
+.header-row div, .process-row div {
     flex: 1;
     padding: 10px;
     text-align: center;
     border-right: 1px solid #ddd;
     position: relative;
+    min-width: 100px;
+    box-sizing: border-box;
 }
 
 .header-row div:last-child,
@@ -60,7 +50,7 @@ body {
     border-right: none;
 }
 
-/* Ползунок изменения ширины */
+/* Ресайзер */
 .resizer {
     position: absolute;
     top: 0;

@@ -7,29 +7,29 @@ function updateProcesses() {
     fetch(get_data_url)
         .then(response => response.json())
         .then(data => {
-            table.innerHTML = ""; 
             const processes = data.processes;
+
+            // Удаляем старые строки
+            const oldRows = document.querySelectorAll(".process-row");
+            oldRows.forEach(row => row.remove());
+
             for (const pid in processes) {
                 const process = processes[pid];
                 const row = document.createElement("div");
                 row.classList.add("process-row");
                 row.innerHTML = `
-                    <div class="process">
-                        <span class="name">Name: ${process.name}</span>
-                        <span class="pid">PID: ${pid}</span>
-                        <span class="memUse">MemUse: ${process.memUse}Mb</span>
-                        <span class="CPUUse">CPUUse: ${process.CPUUse}%</span>
-                    </div>
+                    <div>${process.name}</div>
+                    <div>${pid}</div>
+                    <div>${process.memUse}Mb</div>
+                    <div>${process.CPUUse}</div>
                 `;
                 table.appendChild(row);
-            };
-            
-            container.innerHTML = table.innerHTML || '<div>No processes found</div>';
+            }
         })
         .catch(error => console.error('Error:', error));
 }
 
 document.addEventListener('DOMContentLoaded', () => {
     setInterval(updateProcesses, 1000);
-    updateProcesses(); // Первый запрос
+    updateProcesses();
 });

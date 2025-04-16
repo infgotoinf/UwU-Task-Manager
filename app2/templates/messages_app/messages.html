@@ -9,37 +9,25 @@
 </head>
 <body>
 
-    <!-- Верхняя панель -->
-    <div class="top-bar">
-        <div class="header-row">
-            <div>Имя<span class="resizer"></span></div>
-            <div>PID<span class="resizer"></span></div>
-            <div>Память<span class="resizer"></span></div>
-            <div>ЦП<span class="resizer"></span></div>
+    <!-- Контейнер с таблицей -->
+    <div class="table-container">
+        <div class="table">
+            <div class="header-row">
+                <div><span>Имя</span><span class="resizer"></span></div>
+                <div><span>PID</span><span class="resizer"></span></div>
+                <div><span>Память</span><span class="resizer"></span></div>
+                <div><span>ЦП</span><span class="resizer"></span></div>
+            </div>
+            <!-- process-row строки добавляются через ajax -->
         </div>
     </div>
-    
-    <!-- Контейнер с полосой прокрутки -->
-    <div class="table-container">
-        <div class="table"></div>
-    </div>
-
-    <!-- Основной контент
-    <div id="process-container" class="processes">
-        {% for pid, process in processes.items %}
-            <div class="process">
-                <span class="name">name: {{ process.name }}</span>
-                <span class="PID">PID: {{ pid }}</span>
-                <span class="memUse">memUse: {{ process.memUse }}Mb</span>
-            </div>
-        {% endfor %}
-    </div> -->
 
     <!-- Нижняя панель -->
     <div class="bottom-bar">
         <button class="btn">Снять задачу</button>
     </div>
+
     <script src="{% static 'js/ajax.js' %}"></script>
-<script src="{% static 'js/main.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
 </body>
 </html>
