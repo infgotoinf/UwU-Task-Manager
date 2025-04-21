@@ -6,14 +6,15 @@ use std::{env, ffi::{CStr, c_char}};
 //     serde_json::to_string(&env::current_dir()).into()
 // }
 
-struct Process{
+struct Process 
+{
     name: String,
     pid: String,
     mem_use: String,
     cpu_use: String
 }
 
-impl Process
+impl Process 
 {
     fn new(name : &str, pid : &str, mem_use : &str, cpu_use : &str) -> Self
     {
@@ -22,15 +23,61 @@ impl Process
 }
 
 #[tauri::command]
-fn my_custom_command2() -> String {
-    unsafe {
+fn my_custom_command2() -> String
+{
+    unsafe
+    {
         let path = env::current_dir().unwrap();
         let str_path = format!("{}\\..\\..\\dll\\Dll1\\x64\\Debug\\Dll1.dll", path.display()).to_string();
         let lib = libloading::Library::new(str_path).unwrap();
         let func: libloading::Symbol<unsafe extern "C" fn() -> *const c_char> = lib.get(b"PrintProcessInfo").expect("ErrorLOL");
         let ptr_result = func();
         let c_result = CStr::from_ptr(ptr_result);
-        c_result.to_string_lossy().into_owned()
+        let result = c_result.to_string_lossy(); //.into_owned()
+
+        let sub_result = &result[1..result.len()];
+        let mut parsed: String  = "".to_string();
+        let mut switch          = 0;
+        let mut name: String    = "".to_string();
+        let mut pid: String     = "".to_string();
+        let mut mem_use: String = "".to_string();
+        let mut cpu_use: String = "".to_string();
+        for i in sub_result.chars()
+        {
+            parsed += &i.to_string();
+            match switch
+            {
+            0 =>if (i != ':')
+                    mem_use += &i.to_string();
+                else
+                    switch = 1;
+            1 =>if (i != ':')
+                    cpu_use += &i.to_string();
+                else
+                    switch = 2;
+            2 =>if (i != ':')
+                    name += &i.to_string();
+                else
+                    switch = 3;
+            3 =>if (i != ';')
+                    pid += &i.to_string();
+                else
+                {
+                    process = Process(name, pid, mem_use, cpu_use);
+                    switch  = 0;
+                    name    = "".to_string();
+                    pid     = "".to_string();
+                    mem_use = "".to_string();
+                    cpu_use = "".to_string();
+                    let mut response[process.pid] = {
+                        'name':     process.name,
+                        'mem_use' : process.mem_use,
+                        'cpu_use' : process.cpu_use
+                    }
+                }
+            }
+        }
+        parsed
     }
 }
 // fn my_custom_command2() -> String {
