@@ -47,22 +47,28 @@ fn my_custom_command2() -> String
             parsed += &i.to_string();
             match switch
             {
-            0 =>if (i != ':')
+            0 =>if (i != ':') {
                     mem_use += &i.to_string();
-                else
+                }
+                else {
                     switch = 1;
-            1 =>if (i != ':')
+                }
+            1 =>if (i != ':') {
                     cpu_use += &i.to_string();
-                else
+                }
+                else {
                     switch = 2;
-            2 =>if (i != ':')
+                }
+            2 =>if (i != ':') {
                     name += &i.to_string();
-                else
+                }
+                else {
                     switch = 3;
-            3 =>if (i != ';')
+                }
+            3 =>if (i != ';') {
                     pid += &i.to_string();
-                else
-                {
+                }
+                else {
                     process = Process(name, pid, mem_use, cpu_use);
                     switch  = 0;
                     name    = "".to_string();
@@ -70,9 +76,9 @@ fn my_custom_command2() -> String
                     mem_use = "".to_string();
                     cpu_use = "".to_string();
                     let mut response[process.pid] = {
-                        'name':     process.name,
-                        'mem_use' : process.mem_use,
-                        'cpu_use' : process.cpu_use
+                        "name"    : process.name,
+                        "mem_use" : process.mem_use,
+                        "cpu_use" : process.cpu_use
                     }
                 }
             }
