@@ -1,5 +1,5 @@
 ﻿  main.cpp
-C:\Users\studentcoll\source\repos\infgotoinf\uwu-task-manager2\dll\Dll1\try3\main.cpp(12,11): warning C4101: processID: неиспользованная локальная переменная
-  try3.vcxproj -> C:\Users\studentcoll\source\repos\infgotoinf\uwu-task-manager2\dll\Dll1\x64\Debug\try3.exe
+E:\Sites\Collage\uwu-task-manager2\dll\Dll1\try3\main.cpp(12,11): warning C4101: processID: неиспользованная локальная переменная
+  try3.vcxproj -> E:\Sites\Collage\uwu-task-manager2\dll\Dll1\x64\Debug\try3.exe
   "pwsh.exe" не является внутренней или внешней
   командой, исполняемой программой или пакетным файлом.

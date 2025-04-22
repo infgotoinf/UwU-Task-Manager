@@ -7,7 +7,7 @@
 #include <string>
 #include <map>
 
-const char* GetAllProcessesCPUUsage() {
+const char* PrintProcessInfo() {
     DWORD aProcesses[1024], cbNeeded, cProcesses;
     DWORD processID;
     std::string result;
@@ -22,19 +22,6 @@ const char* GetAllProcessesCPUUsage() {
 
     std::map<DWORD, FILETIME> procKernelTimes1, procUserTimes1;
 
-    /*for (DWORD i = 0; i < cProcesses; i++)
-    {
-        DWORD processID = aProcesses[i];
-        HANDLE hProcess = OpenProcess(PROCESS_QUERY_INFORMATION, FALSE, processID);
-        if (!hProcess) continue;
-
-        FILETIME procCreationTime, procExitTime, procKernelTime, procUserTime;
-        if (GetProcessTimes(hProcess, &procCreationTime, &procExitTime, &procKernelTime, &procUserTime)) {
-            procKernelTimes1[processID] = procKernelTime;
-            procUserTimes1[processID] = procUserTime;
-        }
-        CloseHandle(hProcess);
-    }*/
     for (DWORD i = 0; i < cProcesses; i++)
     {
         DWORD processID = aProcesses[i];
@@ -65,11 +52,7 @@ const char* GetAllProcessesCPUUsage() {
         if (processID == 0) continue;
 
         wchar_t szProcessName[MAX_PATH] = L"<unknown>";
-        HANDLE hProcess = OpenProcess(
-            PROCESS_QUERY_INFORMATION | PROCESS_VM_READ,
-            FALSE,
-            processID
-        );
+        HANDLE hProcess = OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_READ, FALSE, processID);
 
         if (hProcess != NULL)
         {
@@ -77,10 +60,7 @@ const char* GetAllProcessesCPUUsage() {
             DWORD cbNeededModule;
             if (EnumProcessModules(hProcess, &hMod, sizeof(hMod), &cbNeededModule))
             {
-                GetModuleBaseNameW(
-                    hProcess,
-                    hMod,
-                    szProcessName,
+                GetModuleBaseNameW(hProcess, hMod, szProcessName,
                     sizeof(szProcessName) / sizeof(wchar_t)
                 );
             }
@@ -125,7 +105,7 @@ const char* GetAllProcessesCPUUsage() {
         }
         else processName = "<unknown>";
 
-        result += processName + ":" + std::to_string(processID) + "\n";
+        result += processName + ":" + std::to_string(processID) + ";";
     }
 
     char* output = new char[result.size() + 1];
@@ -134,5 +114,5 @@ const char* GetAllProcessesCPUUsage() {
 }
 
 int main() {
-    std::cout << GetAllProcessesCPUUsage();
+    std::cout << PrintProcessInfo();
 }
