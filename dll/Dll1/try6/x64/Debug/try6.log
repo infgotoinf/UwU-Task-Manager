@@ -1,0 +1,5 @@
+﻿  6.cpp
+C:\Users\studentcoll\Desktop\UwU\uwu-task-manager2\dll\Dll1\try6\6.cpp(30,44): warning C4267: аргумент: преобразование из "size_t" в "int"; возможна потеря данных
+  try6.vcxproj -> C:\Users\studentcoll\Desktop\UwU\uwu-task-manager2\dll\Dll1\x64\Debug\try6.exe
+  "pwsh.exe" не является внутренней или внешней
+  командой, исполняемой программой или пакетным файлом.

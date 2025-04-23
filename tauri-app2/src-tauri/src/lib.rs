@@ -22,8 +22,11 @@ impl Process
     }
 }
 
+
+
+use tauri::ipc::Response;
 #[tauri::command]
-fn my_custom_command2() -> String
+fn my_custom_command2() -> Vec<Process>
 {
     unsafe
     {
@@ -36,7 +39,7 @@ fn my_custom_command2() -> String
         let result = c_result.to_string_lossy(); //.into_owned()
 
         let sub_result = &result[1..result.len()];
-        let mut parsed: String  = "".to_string();
+        let mut vec_result      = Vec::new();
         let mut switch          = 0;
         let mut name: String    = "".to_string();
         let mut pid: String     = "".to_string();
@@ -44,46 +47,41 @@ fn my_custom_command2() -> String
         let mut cpu_use: String = "".to_string();
         for i in sub_result.chars()
         {
-            parsed += &i.to_string();
+            //parsed += &i.to_string();
             match switch
             {
-            0 =>if (i != ':') {
+            0 =>if i != ':' {
                     mem_use += &i.to_string();
                 }
                 else {
                     switch = 1;
                 }
-            1 =>if (i != ':') {
+            1 =>if i != ':' {
                     cpu_use += &i.to_string();
                 }
                 else {
                     switch = 2;
                 }
-            2 =>if (i != ':') {
+            2 =>if i != ':' {
                     name += &i.to_string();
                 }
                 else {
                     switch = 3;
                 }
-            3 =>if (i != ';') {
+            _ =>if i != ';' {
                     pid += &i.to_string();
                 }
                 else {
-                    process = Process(name, pid, mem_use, cpu_use);
                     switch  = 0;
+                    vec_result.push(Process::new(&name, &pid, &mem_use, &cpu_use));
                     name    = "".to_string();
                     pid     = "".to_string();
                     mem_use = "".to_string();
                     cpu_use = "".to_string();
-                    let mut response[process.pid] = {
-                        "name"    : process.name,
-                        "mem_use" : process.mem_use,
-                        "cpu_use" : process.cpu_use
-                    }
                 }
             }
         }
-        parsed
+        vec_result
     }
 }
 // fn my_custom_command2() -> String {
