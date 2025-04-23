@@ -26,7 +26,7 @@ impl Process
 
 use tauri::ipc::Response;
 #[tauri::command]
-fn my_custom_command2() -> Vec<Process>
+fn my_custom_command2() -> Vec<String>
 {
     unsafe
     {
@@ -72,12 +72,15 @@ fn my_custom_command2() -> Vec<Process>
                     pid += &i.to_string();
                 }
                 else {
-                    switch  = 0;
-                    vec_result.push(Process::new(&name, &pid, &mem_use, &cpu_use));
+                    vec_result.push(name);
+                    vec_result.push(pid);
+                    vec_result.push(mem_use);
+                    vec_result.push(cpu_use);
                     name    = "".to_string();
                     pid     = "".to_string();
                     mem_use = "".to_string();
                     cpu_use = "".to_string();
+                    switch  = 0;
                 }
             }
         }

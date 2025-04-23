@@ -6,7 +6,9 @@ let greetMsgEl: HTMLElement | null;
 async function greet() {
   if (greetMsgEl) { // (greetMsgEl && greetInputEl) {
     // Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
-    greetMsgEl.textContent = await invoke("my_custom_command2");
+    let da: Array<string> = await invoke("my_custom_command2");
+    greetMsgEl.textContent = da[0];
+    // for i in da
   }
 }
 
