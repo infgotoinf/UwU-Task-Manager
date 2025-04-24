@@ -45,12 +45,12 @@ def ParseProcessInfo():
                 else:
                     process = Process(name, PID, memUse, CPUUse)
                     switch = 0
-                    name = ""
-                    PID = ""
+                    name   = ""
+                    PID    = ""
                     memUse = ""
                     CPUUse = ""
                     response[process.PID] = {
-                        'name': process.name,
+                        'name'   : process.name,
                         'memUse' : process.memUse,
                         'CPUUse' : process.CPUUse
                     }

@@ -1,30 +1,22 @@
 // Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
 use std::{env, ffi::{CStr, c_char}};
 
-// #[tauri::command]
-// fn my_custom_command() -> String {
-//     serde_json::to_string(&env::current_dir()).into()
+// struct Process 
+// {
+//     name: String,
+//     pid: String,
+//     mem_use: String,
+//     cpu_use: String
 // }
 
-struct Process 
-{
-    name: String,
-    pid: String,
-    mem_use: String,
-    cpu_use: String
-}
+// impl Process 
+// {
+//     fn new(name : &str, pid : &str, mem_use : &str, cpu_use : &str) -> Self
+//     {
+//         Self {name : name.to_owned(), pid : pid.to_owned(), mem_use : mem_use.to_owned(), cpu_use : cpu_use.to_owned()}
+//     }
+// }
 
-impl Process 
-{
-    fn new(name : &str, pid : &str, mem_use : &str, cpu_use : &str) -> Self
-    {
-        Self {name : name.to_owned(), pid : pid.to_owned(), mem_use : mem_use.to_owned(), cpu_use : cpu_use.to_owned()}
-    }
-}
-
-
-
-use tauri::ipc::Response;
 #[tauri::command]
 fn my_custom_command2() -> Vec<String>
 {
