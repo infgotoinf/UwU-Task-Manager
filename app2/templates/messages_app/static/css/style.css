@@ -1,18 +1,9 @@
-.process {
-    color: black;
-    font-size: 28px;
-    /* margin: 5px;
-    padding: 10px;
-    border: 1px solid #ddd; */
-}
-
 body {
     margin: 0;
     font-family: Arial, sans-serif;
     overflow-x: hidden;
 }
 
-/* Контейнер таблицы */
 .table-container {
     width: 100%;
     display: flex;
@@ -21,36 +12,29 @@ body {
     padding-bottom: 60px;
 }
 
-/* Вся таблица */
 .table {
-    display: flex;
-    flex-direction: column;
+    display: table;
+    width: 100%;
     min-width: 600px;
+    border-collapse: collapse;
+    table-layout: fixed;
 }
 
-/* Строки */
 .header-row, .process-row {
-    display: flex;
-    border-bottom: 1px solid #ddd;
+    display: table-row;
 }
 
-/* Ячейки */
 .header-row div, .process-row div {
-    flex: 1;
+    display: table-cell;
     padding: 10px;
     text-align: center;
-    border-right: 1px solid #ddd;
+    border: 1px solid #ddd;
     position: relative;
     min-width: 100px;
     box-sizing: border-box;
+    word-wrap: break-word;
 }
 
-.header-row div:last-child,
-.process-row div:last-child {
-    border-right: none;
-}
-
-/* Ресайзер */
 .resizer {
     position: absolute;
     top: 0;
@@ -59,13 +43,13 @@ body {
     height: 100%;
     cursor: ew-resize;
     background: transparent;
+    z-index: 1;
 }
 
 .resizer:hover {
     background: gray;
 }
 
-/* Нижняя панель */
 .bottom-bar {
     position: fixed;
     bottom: 0;

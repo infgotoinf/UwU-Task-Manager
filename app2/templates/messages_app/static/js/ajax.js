@@ -1,6 +1,4 @@
 const get_data_url = '/get_data/';
-const container = document.getElementById('process-container');
-
 const table = document.querySelector(".table");
 
 function updateProcesses() {
@@ -9,7 +7,6 @@ function updateProcesses() {
         .then(data => {
             const processes = data.processes;
 
-            // Удаляем старые строки
             const oldRows = document.querySelectorAll(".process-row");
             oldRows.forEach(row => row.remove());
 
@@ -17,19 +14,21 @@ function updateProcesses() {
                 const process = processes[pid];
                 const row = document.createElement("div");
                 row.classList.add("process-row");
+
                 row.innerHTML = `
                     <div>${process.name}</div>
                     <div>${pid}</div>
                     <div>${process.memUse}Mb</div>
-                    <div>${process.CPUUse}</div>
+                    <div>${process.cpu || '—'}</div>
                 `;
+
                 table.appendChild(row);
             }
         })
-        .catch(error => console.error('Error:', error));
+        .catch(error => console.error("Ошибка при получении данных:", error));
 }
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener("DOMContentLoaded", () => {
     setInterval(updateProcesses, 1000);
     updateProcesses();
 });

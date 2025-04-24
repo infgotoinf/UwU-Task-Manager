@@ -4,12 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <title>Диспетчер задач</title>
 </head>
 <body>
-
-    <!-- Контейнер с таблицей -->
     <div class="table-container">
         <div class="table">
             <div class="header-row">
@@ -18,11 +16,10 @@
                 <div><span>Память</span><span class="resizer"></span></div>
                 <div><span>ЦП</span><span class="resizer"></span></div>
             </div>
-            <!-- process-row строки добавляются через ajax -->
+            <!-- process-row добавляются динамически -->
         </div>
     </div>
 
-    <!-- Нижняя панель -->
     <div class="bottom-bar">
         <button class="btn">Снять задачу</button>
     </div>
