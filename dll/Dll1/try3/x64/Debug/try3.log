@@ -1,5 +1,4 @@
-﻿  main.cpp
-E:\Sites\Collage\uwu-task-manager2\dll\Dll1\try3\main.cpp(12,11): warning C4101: processID: неиспользованная локальная переменная
+﻿  LINK : не найден или не выполнена сборка E:\Sites\Collage\uwu-task-manager2\dll\Dll1\x64\Debug\try3.exe при последней инкрементной компоновке; выполняется полная компоновка
   try3.vcxproj -> E:\Sites\Collage\uwu-task-manager2\dll\Dll1\x64\Debug\try3.exe
   "pwsh.exe" не является внутренней или внешней
   командой, исполняемой программой или пакетным файлом.

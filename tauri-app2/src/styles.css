@@ -1,4 +1,38 @@
-table, th, td {
-  border: 1px solid black;
-  border-collapse: collapse;
- }
+body {
+  background-color: rgb(45, 45, 45);
+  color: rgb(255, 255, 255);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+table {
+  background-color: rgb(90, 95, 100);
+  font-size: 16px;
+  border-radius: 10px;
+  width: 100%;
+}
+
+
+tr:nth-child(even) {
+  background-color: rgb(80, 85, 90);
+}
+
+tr:hover {
+  background-color: rgb(250, 100, 175);
+}
+
+
+
+td.pid, td.mem_use {
+  width: 10%;
+}
+td.name {
+  width: 40%;
+}
+td.cpu_use, td.gpu_use {
+  width: 7.5%;
+}
+
+
+::selection {
+  background-color: rgb(250, 200, 0);
+}

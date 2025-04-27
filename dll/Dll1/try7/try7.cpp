@@ -16,19 +16,7 @@ std::map<DWORD, double> GetGpuUsagePerProcess() {
     std::string result;
     std::array<char, 512> buffer;
 
-    std::string command =
-        "powershell -Command \""
-        "Get-Counter '\\GPU Engine(*)\\Utilization Percentage' | "
-        "Select -ExpandProperty CounterSamples | "
-        "Where-Object { $_.InstanceName -like 'pid_*' } | "
-        "ForEach-Object { $_.InstanceName + '|' + $_.CookedValue }\"";
-
-    std::unique_ptr<FILE, decltype(&_pclose)> pipe(_popen(command.c_str(), "r"), _pclose);
-    if (!pipe) return gpuUsageMap;
-
-    while (fgets(buffer.data(), buffer.size(), pipe.get()) != nullptr) {
-        result += buffer.data();
-    }
+    
 
     std::istringstream stream(result);
     std::string line;

@@ -1,8 +1,8 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
-  "productName": "tauri-app2",
+  "productName": "uwu-task-manager",
   "version": "0.1.0",
-  "identifier": "com.tauri-app2.app",
+  "identifier": "com.uwu-task-manager.app",
   "build": {
     "beforeDevCommand": "bun run dev",
     "devUrl": "http://localhost:1420",
@@ -13,7 +13,7 @@
     "withGlobalTauri": true,
     "windows": [
       {
-        "title": "tauri-app2",
+        "title": "UwU Task Manager",
         "width": 800,
         "height": 600
       }
@@ -28,7 +28,7 @@
     "icon": [
       "icons/32x32.png",
       "icons/128x128.png",
-      "icons/128x128@2x.png",
+      "icons/512x512.png",
       "icons/icon.icns",
       "icons/icon.ico"
     ]

@@ -1,20 +1,18 @@
-﻿  pch.cpp
-  dllmain.cpp
-  TaskManager.cpp
-E:\Sites\Collage\uwu-task-manager2\dll\Dll1\Dll1\TaskManager.cpp(32,44): warning C4267: аргумент: преобразование из "size_t" в "int"; возможна потеря данных
+﻿  TaskManager.cpp
+E:\Sites\Collage\uwu-task-manager2\dll\Dll1\Dll1\TaskManager.cpp(20,27): warning C4101: buffer: неиспользованная локальная переменная
   (компиляция исходного файла "/TaskManager.cpp")
   
-E:\Sites\Collage\uwu-task-manager2\dll\Dll1\Dll1\TaskManager.cpp(52,13): warning C4273: PrintProcessInfo: несовместимое связывание dll
+E:\Sites\Collage\uwu-task-manager2\dll\Dll1\Dll1\TaskManager.cpp(40,13): warning C4273: PrintProcessInfo: несовместимое связывание dll
   (компиляция исходного файла "/TaskManager.cpp")
       E:\Sites\Collage\uwu-task-manager2\dll\Dll1\Dll1\TaskManager.h(9,40):
       см. предыдущее определение "PrintProcessInfo"
   
-E:\Sites\Collage\uwu-task-manager2\dll\Dll1\Dll1\TaskManager.cpp(156,6): warning C4273: KillProcessByPID: несовместимое связывание dll
+E:\Sites\Collage\uwu-task-manager2\dll\Dll1\Dll1\TaskManager.cpp(144,6): warning C4273: KillProcessByPID: несовместимое связывание dll
   (компиляция исходного файла "/TaskManager.cpp")
       E:\Sites\Collage\uwu-task-manager2\dll\Dll1\Dll1\TaskManager.h(10,33):
       см. предыдущее определение "KillProcessByPID"
   
-  Создание кода...
+  LINK : не найден или не выполнена сборка E:\Sites\Collage\uwu-task-manager2\dll\Dll1\x64\Debug\Dll1.dll при последней инкрементной компоновке; выполняется полная компоновка
      Создается библиотека E:\Sites\Collage\uwu-task-manager2\dll\Dll1\x64\Debug\Dll1.lib и объект E:\Sites\Collage\uwu-task-manager2\dll\Dll1\x64\Debug\Dll1.exp
   Dll1.vcxproj -> E:\Sites\Collage\uwu-task-manager2\dll\Dll1\x64\Debug\Dll1.dll
   "pwsh.exe" не является внутренней или внешней

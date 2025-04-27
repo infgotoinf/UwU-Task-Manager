@@ -23,7 +23,7 @@ async fn my_custom_command2() -> Vec<String>
     unsafe
     {
         let path = env::current_dir().unwrap();
-        let str_path = format!("{}\\..\\..\\dll\\Dll1\\x64\\Debug\\Dll1.dll", path.display()).to_string();
+        let str_path = format!("{}\\Dll1.dll", path.display()).to_string();
         let lib = libloading::Library::new(str_path).unwrap();
         let func: libloading::Symbol<unsafe extern "C" fn() -> *const c_char> = lib.get(b"PrintProcessInfo").expect("ErrorLOL");
         let ptr_result = func();

@@ -3564,18 +3564,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "tauri-app2"
-version = "0.1.0"
-dependencies = [
- "libloading 0.8.6",
- "serde",
- "serde_json",
- "tauri",
- "tauri-build",
- "tauri-plugin-opener",
-]
-
-[[package]]
 name = "tauri-build"
 version = "2.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -4181,6 +4169,18 @@ checksum = "458f7a779bf54acc9f347480ac654f68407d3aab21269a6e3c9f922acd9e2da9"
 dependencies = [
  "getrandom 0.3.2",
  "serde",
+]
+
+[[package]]
+name = "uwu-task-manager"
+version = "1.0.0"
+dependencies = [
+ "libloading 0.8.6",
+ "serde",
+ "serde_json",
+ "tauri",
+ "tauri-build",
+ "tauri-plugin-opener",
 ]
 
 [[package]]
