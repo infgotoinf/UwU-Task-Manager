@@ -28,6 +28,6 @@ async function greet() {
 window.addEventListener("DOMContentLoaded", () => {
   // greetInputEl = document.querySelector("#greet-input");
   greetMsgEl = document.querySelector("#processes");
-  setInterval(greet, 5000);
+  setInterval(greet, 1000);
   greet();
 });

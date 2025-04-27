@@ -18,7 +18,7 @@ use std::{env, ffi::{CStr, c_char}};
 // }
 
 #[tauri::command]
-fn my_custom_command2() -> Vec<String>
+async fn my_custom_command2() -> Vec<String>
 {
     unsafe
     {
