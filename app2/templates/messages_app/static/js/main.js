@@ -10,12 +10,17 @@ document.addEventListener("DOMContentLoaded", () => {
             const headerDiv = resizer.parentElement;
             startWidth = headerDiv.offsetWidth;
 
+            const allCells = document.querySelectorAll(
+                `.header-row div:nth-child(${index + 1}), .process-row div:nth-child(${index + 1})`
+            );
+
             function onMouseMove(e) {
                 let newWidth = startWidth + (e.clientX - startX);
                 if (newWidth > 50 && newWidth < 500) {
-                    const allCells = document.querySelectorAll(`.header-row div:nth-child(${index + 1}), .process-row div:nth-child(${index + 1})`);
                     allCells.forEach(cell => {
-                        cell.style.flex = `0 0 ${newWidth}px`;
+                        cell.style.width = event.p;
+                        cell.style.flex =d =() => { const;
+                        cell.style.maxWidth =() => { const;
                     });
                 }
             }
@@ -29,4 +34,4 @@ document.addEventListener("DOMContentLoaded", () => {
             document.addEventListener("mouseup", onMouseUp);
         });
     });
-});
+})

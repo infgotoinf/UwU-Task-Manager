@@ -38,6 +38,7 @@ async fn my_custom_command2() -> Vec<String>
         let mut mem_use: String = "".to_string();
         let mut cpu_use: String = "".to_string();
         let mut gpu_use: String = "".to_string();
+        let mut gpu_use: String = "".to_string();
         for i in sub_result.chars()
         {
             //parsed += &i.to_string();
@@ -57,9 +58,16 @@ async fn my_custom_command2() -> Vec<String>
                 }
             2 =>if i != ':' {
                     cpu_use += &i.to_string();
+                    cpu_use += &i.to_string();
                 }
                 else {
                     switch = 3;
+                }
+            3 =>if i != ':' {
+                    name += &i.to_string();
+                }
+                else {
+                    switch = 4;
                 }
             3 =>if i != ':' {
                     name += &i.to_string();
@@ -76,10 +84,12 @@ async fn my_custom_command2() -> Vec<String>
                     vec_result.push(mem_use);
                     vec_result.push(cpu_use);
                     vec_result.push(gpu_use);
+                    vec_result.push(gpu_use);
                     name    = "".to_string();
                     pid     = "".to_string();
                     mem_use = "".to_string();
                     cpu_use = "".to_string();
+                    gpu_use = "".to_string();
                     gpu_use = "".to_string();
                     switch  = 0;
                 }

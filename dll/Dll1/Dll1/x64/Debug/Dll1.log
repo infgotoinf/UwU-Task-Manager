@@ -1,21 +1,22 @@
 ﻿  pch.cpp
   dllmain.cpp
   TaskManager.cpp
-C:\Users\studentcoll\source\repos\infgotoinf\uwu-task-manager2\dll\Dll1\Dll1\TaskManager.cpp(14,13): warning C4273: PrintProcessInfo: несовместимое связывание dll
+C:\Users\studentcoll\Desktop\UwU\uwu-task-manager2\dll\Dll1\Dll1\TaskManager.cpp(32,44): warning C4267: аргумент: преобразование из "size_t" в "int"; возможна потеря данных
   (компиляция исходного файла "/TaskManager.cpp")
-      C:\Users\studentcoll\source\repos\infgotoinf\uwu-task-manager2\dll\Dll1\Dll1\TaskManager.h(9,40):
+  
+C:\Users\studentcoll\Desktop\UwU\uwu-task-manager2\dll\Dll1\Dll1\TaskManager.cpp(52,13): warning C4273: PrintProcessInfo: несовместимое связывание dll
+  (компиляция исходного файла "/TaskManager.cpp")
+      C:\Users\studentcoll\Desktop\UwU\uwu-task-manager2\dll\Dll1\Dll1\TaskManager.h(9,40):
       см. предыдущее определение "PrintProcessInfo"
   
-C:\Users\studentcoll\source\repos\infgotoinf\uwu-task-manager2\dll\Dll1\Dll1\TaskManager.cpp(16,11): warning C4101: processID: неиспользованная локальная переменная
+C:\Users\studentcoll\Desktop\UwU\uwu-task-manager2\dll\Dll1\Dll1\TaskManager.cpp(156,6): warning C4273: KillProcessByPID: несовместимое связывание dll
   (компиляция исходного файла "/TaskManager.cpp")
-  
-C:\Users\studentcoll\source\repos\infgotoinf\uwu-task-manager2\dll\Dll1\Dll1\TaskManager.cpp(122,6): warning C4273: KillProcessByPID: несовместимое связывание dll
-  (компиляция исходного файла "/TaskManager.cpp")
-      C:\Users\studentcoll\source\repos\infgotoinf\uwu-task-manager2\dll\Dll1\Dll1\TaskManager.h(10,33):
+      C:\Users\studentcoll\Desktop\UwU\uwu-task-manager2\dll\Dll1\Dll1\TaskManager.h(10,33):
       см. предыдущее определение "KillProcessByPID"
   
   Создание кода...
-     Создается библиотека C:\Users\studentcoll\source\repos\infgotoinf\uwu-task-manager2\dll\Dll1\x64\Debug\Dll1.lib и объект C:\Users\studentcoll\source\repos\infgotoinf\uwu-task-manager2\dll\Dll1\x64\Debug\Dll1.exp
-  Dll1.vcxproj -> C:\Users\studentcoll\source\repos\infgotoinf\uwu-task-manager2\dll\Dll1\x64\Debug\Dll1.dll
+  LINK : не найден или не выполнена сборка C:\Users\studentcoll\Desktop\UwU\uwu-task-manager2\dll\Dll1\x64\Debug\Dll1.dll при последней инкрементной компоновке; выполняется полная компоновка
+     Создается библиотека C:\Users\studentcoll\Desktop\UwU\uwu-task-manager2\dll\Dll1\x64\Debug\Dll1.lib и объект C:\Users\studentcoll\Desktop\UwU\uwu-task-manager2\dll\Dll1\x64\Debug\Dll1.exp
+  Dll1.vcxproj -> C:\Users\studentcoll\Desktop\UwU\uwu-task-manager2\dll\Dll1\x64\Debug\Dll1.dll
   "pwsh.exe" не является внутренней или внешней
   командой, исполняемой программой или пакетным файлом.
