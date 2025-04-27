@@ -1,6 +1,6 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
-  "productName": "uwu-task-manager",
+  "productName": "UwU Task Manager",
   "version": "0.1.0",
   "identifier": "com.uwu-task-manager.app",
   "build": {
