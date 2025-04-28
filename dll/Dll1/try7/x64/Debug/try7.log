@@ -1,6 +1,0 @@
-﻿  try7.cpp
-E:\Sites\Collage\uwu-task-manager2\dll\Dll1\try7\try7.cpp(17,27): warning C4101: buffer: неиспользованная локальная переменная
-  LINK : не найден или не выполнена сборка E:\Sites\Collage\uwu-task-manager2\dll\Dll1\x64\Debug\try7.exe при последней инкрементной компоновке; выполняется полная компоновка
-  try7.vcxproj -> E:\Sites\Collage\uwu-task-manager2\dll\Dll1\x64\Debug\try7.exe
-  "pwsh.exe" не является внутренней или внешней
-  командой, исполняемой программой или пакетным файлом.

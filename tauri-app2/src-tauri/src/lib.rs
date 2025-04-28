@@ -18,7 +18,7 @@ use std::{env, ffi::{CStr, c_char}};
 // }
 
 #[tauri::command]
-async fn my_custom_command2() -> Vec<String>
+async fn print_process_info() -> Vec<String>
 {
     unsafe
     {
@@ -40,7 +40,6 @@ async fn my_custom_command2() -> Vec<String>
         let mut gpu_use: String = "".to_string();
         for i in sub_result.chars()
         {
-            //parsed += &i.to_string();
             match switch
             {
             0 =>if i != ':' {
@@ -50,13 +49,13 @@ async fn my_custom_command2() -> Vec<String>
                     switch = 1;
                 }
             1 =>if i != ':' {
-                    gpu_use += &i.to_string();
+                    cpu_use += &i.to_string();
                 }
                 else {
                     switch = 2;
                 }
             2 =>if i != ':' {
-                    cpu_use += &i.to_string();
+                    gpu_use += &i.to_string();
                 }
                 else {
                     switch = 3;
@@ -88,16 +87,25 @@ async fn my_custom_command2() -> Vec<String>
         vec_result
     }
 }
-// fn my_custom_command2() -> String {
-//     let path = env::current_dir().unwrap();
-//     format!("{}\\..\\..\\dll\\Dll1\\x64\\Debug\\Dll1.dll", path.display()).to_string()
-// }
+
+#[tauri::command]
+async fn kill_process(pid: i32)
+{
+    unsafe
+    {
+        let path = env::current_dir().unwrap();
+        let str_path = format!("{}\\Dll1.dll", path.display()).to_string();
+        let lib = libloading::Library::new(str_path).unwrap();
+        let func: libloading::Symbol<unsafe extern "C" fn(i32)> = lib.get(b"KillProcessByPID").expect("ErrorLOL");
+        func(pid);
+    }
+}
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     tauri::Builder::default()
         .plugin(tauri_plugin_opener::init())
-        .invoke_handler(tauri::generate_handler![my_custom_command2])
+        .invoke_handler(tauri::generate_handler![print_process_info, kill_process])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }

@@ -1,16 +1,68 @@
 body {
   background-color: rgb(45, 45, 45);
-  color: rgb(255, 255, 255);
+  color: #ffffff;
   font-family: Arial, Helvetica, sans-serif;
 }
 
 table {
-  background-color: rgb(90, 95, 100);
   font-size: 16px;
   border-radius: 10px;
   width: 100%;
+  background-color: rgb(90, 95, 100);
 }
 
+button {
+  font-size: 16px;
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0);
+  color: rgb(255, 255, 255);
+  text-shadow: -1.5px 1.5px 0px rgba(0, 0, 0, 0.25);
+}
+
+
+.first-row {
+  text-align: auto;
+}
+
+.second-row {
+  border-radius: 10px;
+  margin: 5px 0px;
+  padding: 5px 0px;
+  background-color: rgb(90, 95, 100);
+}
+
+.first-row-btn {
+  border: none;
+}
+
+.second-row-btn {
+  text-align: right;
+  border: none;
+}
+
+#mem_use, #cpu_use, #gpu_use {
+  text-align: right;
+  margin-right: 0;
+}
+
+td.pid, td.mem_use {
+  width: 10%;
+}
+td.name {
+  width: 62.5%;
+}
+td.cpu_use, td.gpu_use {
+  width: 7.5%;
+}
+
+
+button:hover {
+  color: rgb(250, 175, 200);
+}
+
+button:active {
+  color: rgba(0, 0, 0, 0);
+}
 
 tr:nth-child(even) {
   background-color: rgb(80, 85, 90);
@@ -18,18 +70,6 @@ tr:nth-child(even) {
 
 tr:hover {
   background-color: rgb(250, 100, 175);
-}
-
-
-
-td.pid, td.mem_use {
-  width: 10%;
-}
-td.name {
-  width: 40%;
-}
-td.cpu_use, td.gpu_use {
-  width: 7.5%;
 }
 
 
