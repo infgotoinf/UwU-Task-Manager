@@ -10,8 +10,8 @@ async function greet() {
   oldRows.forEach(row => row.remove());
 
   for (let i = 0; i < da.length; i += 5) {
-    const name = da[i];
-    const pid = da[i + 1];
+    const name    = da[i];
+    const pid     = da[i + 1];
     const mem_use = da[i + 2];
     const cpu_use = da[i + 3];
     const gpu_use = da[i + 4];
