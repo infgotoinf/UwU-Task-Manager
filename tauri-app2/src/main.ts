@@ -1,9 +1,10 @@
 import { invoke } from "@tauri-apps/api/core";
 
 let table: HTMLElement | null = document.querySelector(".table");
-const selectedPIDs = new Set<string>();
+let selectedPIDs = new Set<string>();
+let allPIDs = new Set<string>();
 let currentData: Array<string> = [];
-let sortField: string | null = null;
+let sortField: "name" | "pid" | "mem_use" | "cpu_use" | "gpu_use";
 
 async function updateProcesses() {
   let printed_process_info: Array<string> = await invoke("print_process_info");
@@ -13,6 +14,7 @@ async function updateProcesses() {
 
 function renderTable() {
   if (!table) return;
+  allPIDs = new Set<string>();
 
   const oldRows = document.querySelectorAll(".process-row");
   oldRows.forEach(row => row.remove());
@@ -65,6 +67,7 @@ function renderTable() {
       <td class="mem_use">${proc.mem_use}Mb</td>
       <td class="cpu_use">${proc.cpu_use}%</td>
       <td class="gpu_use">${proc.gpu_use}%</td>`;
+    allPIDs.add(proc.pid);
     row.appendChild(checkbox);
     table?.appendChild(row);
   });
@@ -78,17 +81,7 @@ function createSortButtons() {
   const secondRow = document.createElement("div");
   secondRow.classList.add("second-row");
 
-
-  const btn = document.createElement("button");
-  btn.textContent = "Reset";
-  btn.id = "reset";
-  btn.classList.add("first-row-btn");
-  btn.addEventListener("click", () => {
-    sortField = null;
-    renderTable();
-  });
-  firstRow.appendChild(btn);
-
+  
   const killButton = document.createElement("button");
   killButton.textContent = "Kill All Selected";
   killButton.id = "kill_btn";
@@ -107,13 +100,35 @@ function createSortButtons() {
   firstRow.appendChild(killButton);
   buttonContainer.appendChild(firstRow);
 
+  const btn = document.createElement("button");
+  btn.textContent = "Reset";
+  btn.classList.add("first-row-btn");
+  btn.addEventListener("click", () => {
+    selectedPIDs = new Set<string>();
+  });
+  firstRow.appendChild(btn);
 
+  const btn2 = document.createElement("button");
+  btn2.textContent = "Select All";
+  btn2.classList.add("first-row-btn");
+  btn2.addEventListener("click", () => {
+    selectedPIDs = allPIDs;
+  });
+  firstRow.appendChild(btn2);
+
+
+  let Field: "name" | "pid" | "mem_use" | "cpu_use" | "gpu_use";
+  let field_pid: typeof Field = "pid";
+  let field_name: typeof Field = "name";
+  let field_mem: typeof Field = "mem_use";
+  let field_cpu: typeof Field = "cpu_use";
+  let field_gpu: typeof Field = "gpu_use";
   const fields = [
-    { field: "pid", label: `PID` },
-    { field: "name", label: "Name" },
-    { field: "mem_use", label: "Memory" },
-    { field: "cpu_use", label: "CPU" },
-    { field: "gpu_use", label: "GPU" },
+    { field: field_pid, label: "PID" },
+    { field: field_name, label: "Name" },
+    { field: field_mem, label: "Memory" },
+    { field: field_cpu, label: "CPU" },
+    { field: field_gpu, label: "GPU" },
   ];
 
   fields.forEach(({ field, label }) => {
@@ -128,6 +143,15 @@ function createSortButtons() {
     secondRow.appendChild(btn);
     buttonContainer.appendChild(secondRow);
   });
+
+  const btn3 = document.createElement("button");
+  btn3.textContent = "Reset";
+  btn3.classList.add("second-row-btn");
+  btn3.addEventListener("click", () => {
+    sortField = "gpu_use";
+    renderTable();
+  });
+  secondRow.appendChild(btn3);
 
   table?.parentElement?.insertBefore(buttonContainer, table);
 }
