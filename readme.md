@@ -1,4 +1,4 @@
-# UwU task manager
+# UwU Task Manager
 ## User Guide
 ### Что нужно сделать, чтобы запустить ~~приложение~~ <ins>сайт</ins>?
 1. Создать новое виртуальноя приложение: используя ```cd``` перейти в папку проекта и прописать ```python -m venv env```
@@ -7,7 +7,8 @@
 4. Запустите сайт ```cd app2``` ```python manage.py runserver```
    - Если сайт не запускается, тк не может найти python,did not find executable at стоит пересоздать проект ```django-admin startproject app3``` и скопировать в него все важные файлы из предыдущего
    - Также стоит изменить путь к DLL во views.py
-### <ins>Как запустить приложение?</ins>
+## Dev Guide
+### Как запустить приложение?
 1. ```cd tauri-app2```
 2. ```bun install```
    - Если не установлен bun ```npm install -g bun```
