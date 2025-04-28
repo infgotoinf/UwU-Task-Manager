@@ -62,9 +62,9 @@ function renderTable() {
     row.innerHTML = `
       <td class="pid">${proc.pid}</td>
       <td class="name">${proc.name}</td>
-      <td class="mem_use">${proc.mem_use}</td>
-      <td class="cpu_use">${proc.cpu_use}</td>
-      <td class="gpu_use">${proc.gpu_use}</td>`;
+      <td class="mem_use">${proc.mem_use}Mb</td>
+      <td class="cpu_use">${proc.cpu_use}%</td>
+      <td class="gpu_use">${proc.gpu_use}%</td>`;
     row.appendChild(checkbox);
     table?.appendChild(row);
   });

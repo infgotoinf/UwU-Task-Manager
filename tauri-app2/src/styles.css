@@ -45,8 +45,11 @@ button {
   margin-right: 0;
 }
 
-td.pid, td.mem_use {
+td.pid {
   width: 10%;
+}
+td.td.mem_use {
+  width: 15%;
 }
 td.name {
   width: 62.5%;
