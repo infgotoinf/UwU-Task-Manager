@@ -1,4 +1,4 @@
-# [![Typing SVG](https://readme-typing-svg.herokuapp.com?color=%2336BCF7&lines=Computer+science+student)](https://git.io/typing-svg)
+# UwU Task Manager
 ## User Guide
 ### Как скачать и запустить приложение?
 Скачайте самую последнюю версию приложения во вкладке [Release](https://github.com/infgotoinf/UwU-Task-Manager/releases) и запустите "UwU Task Manger.exe" в папке "UwU Tak Manager".
