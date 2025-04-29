@@ -129,7 +129,7 @@ const char* PrintProcessInfo() {
         }
 
         result += processName + ":" + std::to_string(processID) + ";";
-
+        
         CloseHandle(hProcess);
     }
 
