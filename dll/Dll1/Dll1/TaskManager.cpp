@@ -13,52 +13,11 @@
 #include <array>
 #include <memory>
 #include <regex>
-//std::string GetGpuUsage()
-//{
-//    std::string result;
-//    std::array<char, 128> buffer;
-//
-//    std::string command =
-//        "powershell -WindowStyle Minimized -Command \""
-//        "(Get-Counter '\\GPU Engine(*)\\Utilization Percentage').CounterSamples | "
-//        "Where-Object {$_.InstanceName -notlike '*_Copy'} | "
-//        "Measure-Object -Property CookedValue -Sum | "
-//        "Select -ExpandProperty Sum\"";
-//
-//    std::unique_ptr<FILE, decltype(&_pclose)> pipe(_popen(command.c_str(), "r"), _pclose);
-//    if (!pipe) return "Ошибка: не удалось открыть PowerShell";
-//
-//    while (fgets(buffer.data(), buffer.size(), pipe.get()) != nullptr)
-//    {
-//        result += buffer.data();
-//    }
-//
-//    result.erase(std::remove(result.begin(), result.end(), '\n'), result.end());
-//    result.erase(std::remove(result.begin(), result.end(), '\r'), result.end());
-//    result.erase(0, result.find_first_not_of(" \t"));
-//    result.erase(result.find_last_not_of(" \t") + 1);
-//
-//    return result.empty() ? "0" : result + " %";
-//}
 
 std::map<DWORD, double> GetGpuUsagePerProcess() {
     std::map<DWORD, double> gpuUsageMap;
     std::string result;
     std::array<char, 512> buffer;
-
-    std::string command =
-        "powershell -WindowStyle Minimized -Command \""
-        "(Get-Counter '\\GPU Engine(*)\\Utilization Percentage').CounterSamples | "
-        "Where-Object {$_.InstanceName -notlike '*_Copy'} | "
-        "Measure-Object -Property CookedValue -Sum | "
-        "Select -ExpandProperty Sum\"";
-
-    std::unique_ptr<FILE, decltype(&_pclose)> pipe(_popen(command.c_str(), "r"), _pclose);
-    if (!pipe) return gpuUsageMap;
-
-    while (fgets(buffer.data(), buffer.size(), pipe.get()) != nullptr) {
-        result += buffer.data();
-    }
 
     std::istringstream stream(result);
     std::string line;
